@@ -7,11 +7,10 @@ import EnterLoaction from "./components/EnterLocation/EnterLoaction";
 function App() {
   return (
    <>
-        {/*<Registration />*/}
-       <EnterLoaction />
+        <Registration />
        <Container>
            <Row>
-               <Col xs={12}>
+               <Col xs={12} style={{position: "fixed", bottom: '15px'}}>
                    <Button className="w-100 ">
                        Login
                    </Button>

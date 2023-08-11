@@ -1,12 +1,10 @@
-import {Button, Input} from "antd";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {GoogleMap, LoadScript, Marker} from "@react-google-maps/api";
-
 
 
 const containerStyle = {
     width: '100%',
-    height: '400px'
+    height: '300px'
 };
 
 const API_KEY = 'AIzaSyC5dKdEhkdbrG8XV0iEMDTG8jmrShJ6BjI';
@@ -46,12 +44,13 @@ const EnterLoaction = () => {
     const handleDragEnd = (newPosition) => {
         setLocation(newPosition);
     };
+    useEffect(() =>{
+        handleGetLocation();
+    },[])
     return (
-        <div>
-            <Button onClick={handleGetLocation}>Locatsiyani olish</Button>
-            <Input placeholder="Latitude" value={location.lat} readOnly />
-            <Input placeholder="Longitude" value={location.lng} readOnly />
-
+        <div className="mb-4">
+            <h1 className="text-center mt-5 py-4">Enter your location</h1>
+            <p>* Select your location from map:</p>
             {location.lat && location.lng && (
                 <LoadScript googleMapsApiKey={API_KEY}>
                     <GoogleMap

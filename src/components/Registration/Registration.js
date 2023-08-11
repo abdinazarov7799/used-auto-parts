@@ -1,10 +1,12 @@
 import {Button, Form, Input, Select} from "antd";
 import {Option} from "antd/es/mentions";
 import {Container} from "reactstrap";
-import {useState} from "react";
+import React, {useState} from "react";
+import EnterLoaction from "../EnterLocation/EnterLoaction";
 
 function Registration() {
     const [role, setRole] = useState(true);
+    const [next, setNext] = useState(false);
     function onRoleChange(e) {
         if (e === 'buyer'){
             setRole(true)
@@ -12,15 +14,17 @@ function Registration() {
             setRole(false)
         }
     }
-    function onFinish() {
-
+    function onFinish(e) {
+        console.log(e)
     }
     return (
         <>
             <Container>
-                <h1 className="text-center">
-                    Registration
-                </h1>
+                {
+                    !next ? <h1 className="text-center mt-5 py-4">
+                        Registration
+                    </h1> : null
+                }
                 <Form
                     name="registration"
                     labelCol={{
@@ -38,61 +42,74 @@ function Registration() {
                     onFinish={onFinish}
                     autoComplete="off"
                 >
-                    <Form.Item
-                        label="Enter your name:"
-                        name="name"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input your name!',
-                            },
-                        ]}
-                    >
-                        <Input />
-                    </Form.Item>
+                    {
+                        !next ?
+                            <>
+                            <Form.Item
+                                label="Enter your name:"
+                                name="name"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please input your name!',
+                                    },
+                                ]}
+                            >
+                                <Input />
+                            </Form.Item>
 
-                    <Form.Item
-                        name="role"
-                        label="Select your role:"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please select your role'
-                            },
-                        ]}
-                    >
-                        <Select
-                            placeholder="Select your role"
-                            onChange={onRoleChange}
-                            allowClear
-                        >
-                            <Option value="buyer">Buyer</Option>
-                            <Option value="seller">Seller</Option>
-                        </Select>
-                    </Form.Item>
+                            <Form.Item
+                                name="role"
+                                label="Select your role:"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please select your role'
+                                    },
+                                ]}
+                            >
+                                <Select
+                                    placeholder="Select your role"
+                                    onChange={onRoleChange}
+                                    allowClear
+                                >
+                                    <Option value="buyer">Buyer</Option>
+                                    <Option value="seller">Seller</Option>
+                                </Select>
+                            </Form.Item>
 
-                    <Form.Item
+                        <Form.Item
                         label="Enter your phone number:"
                         name="phone"
                         rules={[
-                            {
-                                required: true,
-                                message: 'Please input your phone!',
-                            },
+                    {
+                        required: true,
+                        message: 'Please input your phone!',
+                    },
                         ]}
-                    >
+                        >
                         <Input />
-                    </Form.Item>
+                        </Form.Item>
+                            </>
+                        :
+                        <EnterLoaction />
+                    }
 
                     <Form.Item>
                         {
                             role ?
-                                <Button type="primary" htmlType="submit" className="w-100">
+                                <Button type="primary"
+                                        htmlType="submit"
+                                        className="w-100">
                                     Submit
                                 </Button>
                                 :
-                                <Button type="primary"  className="w-100">
-                                    Next
+                                <Button type="primary"
+                                        htmlType="submit"
+                                        className="w-100"
+                                        onClick={() => setNext(true)}
+                                >
+                                    {!next ? 'Next' : 'Submit'}
                                 </Button>
                         }
                     </Form.Item>
