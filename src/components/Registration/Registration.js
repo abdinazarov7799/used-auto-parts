@@ -41,24 +41,7 @@ function Registration() {
         ));
     }
     function onFinish() {
-        if (setRole && !next){
-            fetch(process.env.REACT_APP_REGISTER_API, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body:  JSON.stringify(registrationUserData) })
-                .then(response => response.json())
-                .then(data => {
-                    console.log('Server answer:', data);
-                    setSuccess(data.success);
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-        }
-        if (!role && secondNext){
-            console.log(registrationUserData)
+        if (setRole && !next || !role && secondNext){
             fetch(process.env.REACT_APP_REGISTER_API, {
                 method: 'POST',
                 headers: {
