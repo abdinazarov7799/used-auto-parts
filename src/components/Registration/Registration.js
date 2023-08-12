@@ -3,10 +3,12 @@ import {Option} from "antd/es/mentions";
 import {Container} from "reactstrap";
 import React, {useState} from "react";
 import EnterLoaction from "../EnterLocation/EnterLoaction";
+import SelectCarBrands from "../SelectCarBrands/SelectCarBrands";
 
 function Registration() {
     const [role, setRole] = useState(true);
     const [next, setNext] = useState(false);
+    const [secondNext, setSecondNext] = useState(false);
     function onRoleChange(e) {
         if (e === 'buyer'){
             setRole(true)
@@ -92,7 +94,9 @@ function Registration() {
                         </Form.Item>
                             </>
                         :
-                        <EnterLoaction />
+                            !secondNext ?
+                                <EnterLoaction /> :
+                                <SelectCarBrands />
                     }
 
                     <Form.Item>
@@ -104,13 +108,26 @@ function Registration() {
                                     Submit
                                 </Button>
                                 :
-                                <Button type="primary"
-                                        htmlType="submit"
-                                        className="w-100"
-                                        onClick={() => setNext(true)}
-                                >
-                                    {!next ? 'Next' : 'Submit'}
-                                </Button>
+                                !secondNext ?
+                                    <Button type="primary"
+                                            htmlType="submit"
+                                            className="w-100"
+                                            onClick={() => {
+                                                if (next) setSecondNext(true);
+                                                setNext(true);
+
+                                            }}
+                                    >
+                                        Next
+                                    </Button>
+                                    :
+                                    <Button type="primary"
+                                            htmlType="submit"
+                                            className="w-100"
+                                            onClick={() => setSecondNext(true)}
+                                    >
+                                        Submit
+                                    </Button>
                         }
                     </Form.Item>
                 </Form>
