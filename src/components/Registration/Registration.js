@@ -19,6 +19,7 @@ function Registration() {
     const [next, setNext] = useState(false);
     const [secondNext, setSecondNext] = useState(false);
     const [registrationUserData, setRegistrationUserData] = useState(initialForm);
+    const [success, setSuccess] = useState();
     const [form] = Form.useForm();
     function onRoleChange(e) {
         setRegistrationUserData((prevState) => ({
@@ -39,14 +40,44 @@ function Registration() {
             }
         ));
     }
-    function onFinish(e) {
-        console.log(registrationUserData)
+    function onFinish() {
+        if (setRole && !next){
+            fetch(process.env.REACT_APP_REGISTER_API, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body:  JSON.stringify(registrationUserData) })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Server answer:', data);
+                    setSuccess(data.success);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+        if (!role && secondNext){
+            console.log(registrationUserData)
+            fetch(process.env.REACT_APP_REGISTER_API, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body:  JSON.stringify(registrationUserData) })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Server answer:', data);
+                    setSuccess(data.success);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
     }
     return (
         <>
             <Container>
-                <h4>{registrationUserData.Latitude}</h4>
-                <h4>{registrationUserData.Longitude}</h4>
                 {
                     !next ? <h1 className="text-center mt-5 py-4">
                         Registration
@@ -115,7 +146,7 @@ function Registration() {
                         :
                             !secondNext ?
                                 <EnterLoaction setRegistrationUserData={setRegistrationUserData}/> :
-                                <SelectCarBrands onchange={onChange}/>
+                                <SelectCarBrands setRegistrationUserData={setRegistrationUserData}/>
                     }
 
                     <Form.Item>

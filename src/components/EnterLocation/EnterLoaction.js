@@ -7,7 +7,7 @@ const containerStyle = {
     height: '300px'
 };
 
-const API_KEY = 'AIzaSyC5dKdEhkdbrG8XV0iEMDTG8jmrShJ6BjI';
+const API_KEY = process.env.REACT_APP_MAP_API_KEY;
 
 
 function DraggableMarker({ location, onDragEnd }) {
