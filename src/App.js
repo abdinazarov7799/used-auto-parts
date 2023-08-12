@@ -6,8 +6,8 @@ import LoginPage from "./pages/Login";
 function App() {
   return (
    <>
-       {/*<Register />*/}
-       <LoginPage />
+       <Register />
+       {/*<LoginPage />*/}
    </>
   );
 }

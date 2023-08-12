@@ -5,23 +5,47 @@ import React, {useState} from "react";
 import EnterLoaction from "../EnterLocation/EnterLoaction";
 import SelectCarBrands from "../SelectCarBrands/SelectCarBrands";
 
+const initialForm = {
+    FullName: '',
+    MobileNumber: '',
+    Role: '',
+    Brands: [],
+    Latitude: '',
+    Longitude: '',
+}
+
 function Registration() {
     const [role, setRole] = useState(true);
     const [next, setNext] = useState(false);
     const [secondNext, setSecondNext] = useState(false);
+    const [registrationUserData, setRegistrationUserData] = useState(initialForm);
+    const [form] = Form.useForm();
     function onRoleChange(e) {
+        setRegistrationUserData((prevState) => ({
+            ...prevState,
+            ['Role']: e
+        }))
         if (e === 'buyer'){
             setRole(true)
         }else {
             setRole(false)
         }
     }
+    function onChange(e) {
+        const {name, value} = e.target;
+        setRegistrationUserData((prevState) => ({
+                ...prevState,
+                [name]: value
+            }
+        ));
+    }
     function onFinish(e) {
-        console.log(e)
+        console.log(registrationUserData)
     }
     return (
         <>
             <Container>
+                <h4>{registrationUserData.Latitude}</h4>
                 {
                     !next ? <h1 className="text-center mt-5 py-4">
                         Registration
@@ -29,27 +53,20 @@ function Registration() {
                 }
                 <Form
                     name="registration"
-                    labelCol={{
-                        span: 8,
-                    }}
-                    wrapperCol={{
-                        span: 16,
-                    }}
-                    style={{
-                        maxWidth: 600,
-                    }}
-                    initialValues={{
-                        remember: true,
-                    }}
+                    labelCol={{span: 8}}
+                    wrapperCol={{span: 16}}
+                    style={{maxWidth: 600}}
+                    initialValues={{remember: true}}
                     onFinish={onFinish}
                     autoComplete="off"
+                    form={form}
                 >
                     {
                         !next ?
                             <>
                             <Form.Item
-                                label="Enter your name:"
-                                name="name"
+                                label="Enter your Full Name:"
+                                name="FullName"
                                 rules={[
                                     {
                                         required: true,
@@ -57,7 +74,7 @@ function Registration() {
                                     },
                                 ]}
                             >
-                                <Input />
+                                <Input name="FullName" onChange={onChange} />
                             </Form.Item>
 
                             <Form.Item
@@ -72,6 +89,7 @@ function Registration() {
                             >
                                 <Select
                                     placeholder="Select your role"
+                                    name="role"
                                     onChange={onRoleChange}
                                     allowClear
                                 >
@@ -82,7 +100,7 @@ function Registration() {
 
                         <Form.Item
                         label="Enter your phone number:"
-                        name="phone"
+                        name="MobileNumber"
                         rules={[
                     {
                         required: true,
@@ -90,13 +108,13 @@ function Registration() {
                     },
                         ]}
                         >
-                        <Input />
+                        <Input name="MobileNumber" onChange={onChange}/>
                         </Form.Item>
                             </>
                         :
                             !secondNext ?
-                                <EnterLoaction /> :
-                                <SelectCarBrands />
+                                <EnterLoaction setRegistrationUserData={setRegistrationUserData}/> :
+                                <SelectCarBrands onchange={onChange}/>
                     }
 
                     <Form.Item>
@@ -132,6 +150,7 @@ function Registration() {
                     </Form.Item>
                 </Form>
             </Container>
+
         </>
     );
 }

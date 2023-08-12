@@ -26,7 +26,7 @@ function DraggableMarker({ location, onDragEnd }) {
     );
 }
 
-const EnterLoaction = () => {
+const EnterLoaction = (props) => {
     const [location, setLocation] = useState({
         lat: null,
         lng: null
@@ -38,11 +38,21 @@ const EnterLoaction = () => {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             });
+            props.setRegistrationUserData((prevState) => ({
+                ...prevState,
+                ['Latitude']: location.lat,
+                ['Longitude']: location.lng
+            }))
         });
     };
 
     const handleDragEnd = (newPosition) => {
         setLocation(newPosition);
+        props.setRegistrationUserData((prevState) => ({
+            ...prevState,
+            ['Latitude']: location.lat,
+            ['Longitude']: location.lng
+        }))
     };
     useEffect(() =>{
         handleGetLocation();
