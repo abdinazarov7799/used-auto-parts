@@ -10,8 +10,8 @@ const initialForm = {
     MobileNumber: '',
     Role: '',
     Brands: [],
-    Latitude: '',
-    Longitude: '',
+    Latitude: 0,
+    Longitude: 0,
 }
 
 function Registration() {
@@ -41,6 +41,7 @@ function Registration() {
         ));
     }
     function onFinish() {
+        console.log(registrationUserData)
         if (setRole && !next || !role && secondNext){
             fetch(process.env.REACT_APP_REGISTER_API, {
                 method: 'POST',
