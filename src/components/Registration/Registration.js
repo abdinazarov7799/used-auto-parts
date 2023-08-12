@@ -46,6 +46,7 @@ function Registration() {
         <>
             <Container>
                 <h4>{registrationUserData.Latitude}</h4>
+                <h4>{registrationUserData.Longitude}</h4>
                 {
                     !next ? <h1 className="text-center mt-5 py-4">
                         Registration
