@@ -31,20 +31,16 @@ function NewRequest() {
     }
     const beforeUpload = async (file) => {
         const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-        if (!isJpgOrPng) {
-            message.error('You can only upload JPG/PNG file!');
-            return;
-        }
-
         const isLt2M = file.size / 1024 / 1024 < 10;
-        if (!isLt2M) {
-            message.error('Image must smaller than 10MB!');
-            return;
+        if (!isJpgOrPng) {
+            customMessage('error','You can only upload JPG/PNG file!');
+        }else if (!isLt2M) {
+            customMessage('error','Image must smaller than 10MB!');
+        }else {
+            const uri = await resizeFile(file);
+            const resizedImage = await fetch(uri).then(res => res.blob());
+            return new Blob([resizedImage], { type: 'image/jpeg' });
         }
-
-        const uri = await resizeFile(file);
-        const resizedImage = await fetch(uri).then(res => res.blob());
-        return new Blob([resizedImage], { type: 'image/jpeg' });
     };
 
     const handleChange = (info) => {
