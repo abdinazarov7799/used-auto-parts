@@ -55,11 +55,3 @@ a{
         display: flex;
     }
 }
-@media (min-width: 768px) {
-    .Footer{
-        display: flex;
-    }
-    .FooterMobile{
-        display: none;
-    }
-}

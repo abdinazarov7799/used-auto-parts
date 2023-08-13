@@ -1,9 +1,10 @@
-import {Button, Form, Input, Select} from "antd";
+import {Button, Form, Input, Select,message} from "antd";
 import {Option} from "antd/es/mentions";
 import {Container} from "reactstrap";
 import React, {useState} from "react";
 import EnterLoaction from "../EnterLocation/EnterLoaction";
 import SelectCarBrands from "../SelectCarBrands/SelectCarBrands";
+import {customMessage} from "../Message/Message";
 
 const initialForm = {
     FullName: '',
@@ -26,7 +27,7 @@ function Registration() {
             ...prevState,
             ['Role']: e
         }))
-        if (e === 'buyer'){
+        if (e === 'Buyer'){
             setRole(true)
         }else {
             setRole(false)
@@ -40,9 +41,9 @@ function Registration() {
             }
         ));
     }
+
     function onFinish() {
-        console.log(registrationUserData)
-        if (setRole && !next || !role && secondNext){
+        if (role && !next || !role && secondNext){
             fetch(process.env.REACT_APP_REGISTER_API, {
                 method: 'POST',
                 headers: {
@@ -51,17 +52,22 @@ function Registration() {
                 body:  JSON.stringify(registrationUserData) })
                 .then(response => response.json())
                 .then(data => {
-                    console.log('Server answer:', data);
-                    setSuccess(data.success);
+                    if (data.status === 'error'){
+                        customMessage(`${data.status}`, `Already registered with this number`);
+                    } else {
+                        customMessage(`${data.status}`, `${data.message}`);
+                        setSuccess(data.success);
+                        localStorage.setItem('authUserMobileNumber', `${registrationUserData.MobileNumber}`);
+                    }
                 })
-                .catch(error => {
-                    console.error('Error:', error);
+                .catch(err => {
+                    console.log(err)
                 });
         }
     }
+
     return (
-        <>
-            <Container>
+        <Container>
                 {
                     !next ? <h1 className="text-center mt-5 py-4">
                         Registration
@@ -109,8 +115,8 @@ function Registration() {
                                     onChange={onRoleChange}
                                     allowClear
                                 >
-                                    <Option value="buyer">Buyer</Option>
-                                    <Option value="seller">Seller</Option>
+                                    <Option value="Buyer">Buyer</Option>
+                                    <Option value="Seller">Seller</Option>
                                 </Select>
                             </Form.Item>
 
@@ -122,9 +128,13 @@ function Registration() {
                         required: true,
                         message: 'Please input your phone!',
                     },
+                            {
+                                pattern: /^[0-5]{5,15}$/,
+                                message: 'Phone number must be between 5 to 15 digits!',
+                            }
                         ]}
                         >
-                        <Input name="MobileNumber" onChange={onChange}/>
+                        <Input name="MobileNumber" type={'number'} onChange={onChange}/>
                         </Form.Item>
                             </>
                         :
@@ -165,9 +175,7 @@ function Registration() {
                         }
                     </Form.Item>
                 </Form>
-            </Container>
-
-        </>
+        </Container>
     );
 }
 export default Registration;

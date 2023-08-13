@@ -8,17 +8,18 @@ const RegisterPage = () => {
   return(
       <>
           <Registration />
-          <Container>
-              <Row>
-                  <Col xs={12} style={{position:"absolute", bottom: '15px'}}>
-                      <Link to='/login'>
-                          <Button type="text" className="w-100" style={{background: '#ECECEC', color: '#000'}}>
-                              Login
-                          </Button>
-                      </Link>
-                  </Col>
-              </Row>
-          </Container>
+            <Container>
+                  <Row>
+                      <Col xs={12} style={{position:"absolute", bottom: '15px'}}>
+                          <Link to='/login'>
+                              <Button type="text" className="w-100" style={{background: '#ECECEC', color: '#000'}}>
+                                  Login
+                              </Button>
+                          </Link>
+                      </Col>
+                  </Row>
+            </Container>
+
       </>
   )
 }
