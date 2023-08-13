@@ -24,7 +24,7 @@ function FooterBuyer() {
                             <p className={classes.FooterMobileText} style={{width: '150%'}}>My Requests</p>
                         </Col>
                         <Col>
-                           <Link to='/addItems' className="d-flex flex-column align-items-center">
+                           <Link to='/newRequest' className="d-flex flex-column align-items-center">
                                <div className="text-center pt-2"
                                     style={{
                                         position: "absolute",

@@ -13,14 +13,10 @@ function FooterSeller() {
                 <Container>
                     <Row >
                         <Col>
-                            <Link to="/" className="d-flex flex-column align-items-center">
-                                <img src={HomeImg} width={36} height={36}/>
-                                <p className={classes.FooterMobileText}>Home</p>
+                            <Link to={'/'} className="d-flex flex-column align-items-center">
+                                <img src={FlagImg} width={36} height={36}/>
+                                <p className={classes.FooterMobileText}>Requests</p>
                             </Link>
-                        </Col>
-                        <Col  className="d-flex flex-column align-items-center">
-                            <img src={FlagImg} width={36} height={36}/>
-                            <p className={classes.FooterMobileText}>Offers</p>
                         </Col>
 
                         <Col className="d-flex flex-column align-items-center">
