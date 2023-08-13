@@ -145,7 +145,10 @@ function NewRequest() {
                                     onChange={handleChange}
                                     maxCount={1}
                                 >
-                                    <Button className='d-flex align-items-center' icon={<UploadOutlined style={{fontSize: '16px'}}/>}>Click to Upload</Button>
+                                    <Button className='d-flex align-items-center'
+                                            icon={<UploadOutlined style={{fontSize: '16px'}}/>}>
+                                        Click to Upload
+                                    </Button>
                                 </Upload>
                             </Form.Item>
                         </>
