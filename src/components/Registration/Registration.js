@@ -5,6 +5,7 @@ import React, {useState} from "react";
 import EnterLoaction from "../EnterLocation/EnterLoaction";
 import SelectCarBrands from "../SelectCarBrands/SelectCarBrands";
 import {customMessage} from "../Message/Message";
+import {useNavigate} from "react-router";
 
 const initialForm = {
     FullName: '',
@@ -22,6 +23,7 @@ function Registration() {
     const [registrationUserData, setRegistrationUserData] = useState(initialForm);
     const [success, setSuccess] = useState();
     const [form] = Form.useForm();
+    const navigate = useNavigate()
     function onRoleChange(e) {
         setRegistrationUserData((prevState) => ({
             ...prevState,
@@ -58,6 +60,7 @@ function Registration() {
                         customMessage(`${data.status}`, `${data.message}`);
                         setSuccess(data.success);
                         localStorage.setItem('authUserMobileNumber', `${registrationUserData.MobileNumber}`);
+                        navigate('/')
                     }
                 })
                 .catch(err => {

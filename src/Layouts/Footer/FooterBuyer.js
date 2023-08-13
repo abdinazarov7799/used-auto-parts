@@ -2,6 +2,7 @@ import classes from './footer.module.css';
 import {Col, Container, Row} from "reactstrap";
 import HomeImg from '../../assets/icons/home.svg'
 import FlagImg from '../../assets/icons/flag.svg'
+import PlusImg from '../../assets/icons/Plus.svg'
 import SmileImg from '../../assets/icons/smile.svg'
 import MessageImg from '../../assets/icons/message.svg'
 import {Link} from "react-router-dom";
@@ -18,11 +19,29 @@ function FooterBuyer() {
                                 <p className={classes.FooterMobileText}>Home</p>
                             </Link>
                         </Col>
-                        <Col  className="d-flex flex-column align-items-center">
+                        <Col className="d-flex flex-column align-items-center">
                             <img src={FlagImg} width={36} height={36}/>
-                            <p className={classes.FooterMobileText}>Offers</p>
+                            <p className={classes.FooterMobileText} style={{width: '68px'}}>My Requests</p>
                         </Col>
-
+                        <Col xs={3} >
+                           <Link to='/addItems' className="d-flex flex-column align-items-center">
+                               <div className="text-center pt-2"
+                                    style={{
+                                        position: "absolute",
+                                        width: '60px',
+                                        height: '60px',
+                                        background: '#0A6FB7',
+                                        borderRadius: '50%',
+                                        top: '-25px',
+                                    }}>
+                                   <img src={PlusImg}
+                                        width={42}
+                                        height={42}
+                                   />
+                               </div>
+                               <p className={classes.FooterMobileText} style={{marginTop: '36px'}}>New Request</p>
+                           </Link>
+                        </Col>
                         <Col className="d-flex flex-column align-items-center">
                             <img src={MessageImg} width={36} height={36}/>
                             <p className={classes.FooterMobileText}>Chats</p>

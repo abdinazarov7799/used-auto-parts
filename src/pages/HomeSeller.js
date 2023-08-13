@@ -1,5 +1,5 @@
 import {Col, Container, Row} from "reactstrap";
-import FooterSeller from "../Layouts/Footer/FooterSeller";
+import FooterBuyer from "../Layouts/Footer/FooterBuyer";
 
 function HomeSeller() {
     return (
@@ -11,7 +11,7 @@ function HomeSeller() {
                     </Col>
                 </Row>
             </Container>
-            <FooterSeller />
+            <FooterBuyer />
         </>
     );
 }

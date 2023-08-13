@@ -1,6 +1,6 @@
 import {Col, Container, Row} from "reactstrap";
-import FooterSeller from "../Layouts/Footer/FooterSeller";
 import FooterBuyer from "../Layouts/Footer/FooterBuyer";
+import FooterSeller from "../Layouts/Footer/FooterSeller";
 
 function HomeBuyer() {
     return (
@@ -12,7 +12,7 @@ function HomeBuyer() {
                     </Col>
                 </Row>
             </Container>
-            <FooterBuyer />
+            <FooterSeller />
         </>
     );
 }
