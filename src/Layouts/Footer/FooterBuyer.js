@@ -21,9 +21,9 @@ function FooterBuyer() {
                         </Col>
                         <Col className="d-flex flex-column align-items-center">
                             <img src={FlagImg} width={36} height={36}/>
-                            <p className={classes.FooterMobileText} style={{width: '68px'}}>My Requests</p>
+                            <p className={classes.FooterMobileText} style={{width: '150%'}}>My Requests</p>
                         </Col>
-                        <Col xs={3} >
+                        <Col>
                            <Link to='/addItems' className="d-flex flex-column align-items-center">
                                <div className="text-center pt-2"
                                     style={{
@@ -39,16 +39,18 @@ function FooterBuyer() {
                                         height={42}
                                    />
                                </div>
-                               <p className={classes.FooterMobileText} style={{marginTop: '36px'}}>New Request</p>
+                               <p className={classes.FooterMobileText} style={{marginTop: '36px',width: '150%'}}>New Request</p>
                            </Link>
                         </Col>
                         <Col className="d-flex flex-column align-items-center">
                             <img src={MessageImg} width={36} height={36}/>
                             <p className={classes.FooterMobileText}>Chats</p>
                         </Col>
-                        <Col className="d-flex flex-column align-items-center">
-                            <img src={SmileImg} width={36} height={36}/>
-                            <p className={classes.FooterMobileText}>Profile</p>
+                        <Col>
+                            <Link to={'/profile'} className="d-flex flex-column align-items-center">
+                                <img src={SmileImg} width={36} height={36}/>
+                                <p className={classes.FooterMobileText}>Profile</p>
+                            </Link>
                         </Col>
                     </Row>
                 </Container>

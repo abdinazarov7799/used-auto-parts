@@ -27,9 +27,11 @@ function FooterSeller() {
                             <img src={MessageImg} width={36} height={36}/>
                             <p className={classes.FooterMobileText}>Chats</p>
                         </Col>
-                        <Col className="d-flex flex-column align-items-center">
-                            <img src={SmileImg} width={36} height={36}/>
-                            <p className={classes.FooterMobileText}>Profile</p>
+                        <Col>
+                            <Link to={'/profile'} className="d-flex flex-column align-items-center">
+                                <img src={SmileImg} width={36} height={36}/>
+                                <p className={classes.FooterMobileText}>Profile</p>
+                            </Link>
                         </Col>
                     </Row>
                 </Container>

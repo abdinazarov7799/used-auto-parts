@@ -22,7 +22,8 @@ a{
     box-shadow: #e0dddd 0 0 10px;
 }
 .FooterMobileText{
-    font-size: 12px;
+    text-align: center;
+    font-size: 11px;
     margin-bottom: 0;
 }
 .FooterText{

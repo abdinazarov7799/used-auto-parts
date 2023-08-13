@@ -33,7 +33,8 @@ function App() {
                     } else {
                         setUserData(data);
                         setSuccess(true);
-                        setUserRole(data.user.Role)
+                        setUserRole(data.user.Role);
+                        localStorage.setItem('UserRole', `${data.user.Role}`)
                     }
                 })
                 .catch(err => {
