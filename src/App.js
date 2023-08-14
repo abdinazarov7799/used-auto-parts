@@ -11,38 +11,42 @@ function App() {
     const [success, setSuccess] = useState(false);
     const [userData, setUserData] = useState();
     const navigate = useNavigate();
-    const [userRole,setUserRole] = useState();
+    const [userRole,setUserRole] = useState(localStorage.getItem('UserRole'));
     const mobileNumber = {
         MobileNumber: localStorage.getItem('authUserMobileNumber'),
     }
 
     useEffect(() => {
-        if (mobileNumber){
-            fetch(process.env.REACT_APP_LOGIN_API, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body:  JSON.stringify(mobileNumber) })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === 'error'){
-                        console.log(data);
-                        navigate('/register');
-                        // customMessage(`${data.status}`, `This number is not registered`);
-                    } else {
-                        setUserData(data);
-                        setSuccess(true);
-                        setUserRole(data.user.Role);
-                        localStorage.setItem('UserRole', `${data.user.Role}`);
-                        localStorage.setItem('UserID', `${data.user.UserID}`);
-                    }
-                })
-                .catch(err => {
-                    console.log(err)
-                });
+        if (userRole === undefined){
+            if (mobileNumber){
+                fetch(process.env.REACT_APP_LOGIN_API, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body:  JSON.stringify(mobileNumber) })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'error'){
+                            console.log(data);
+                            navigate('/register');
+                            // customMessage(`${data.status}`, `This number is not registered`);
+                        } else {
+                            setUserData(data);
+                            setSuccess(true);
+                            setUserRole(data.user.Role);
+                            localStorage.setItem('UserRole', `${data.user.Role}`);
+                            localStorage.setItem('UserID', `${data.user.UserID}`);
+                        }
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    });
+            }else {
+                navigate('/register');
+            }
         }else {
-            navigate('/register');
+            setSuccess(true)
         }
 
     },[])
