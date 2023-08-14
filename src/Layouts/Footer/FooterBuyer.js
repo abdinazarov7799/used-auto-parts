@@ -19,9 +19,11 @@ function FooterBuyer() {
                                 <p className={classes.FooterMobileText}>Home</p>
                             </Link>
                         </Col>
-                        <Col className="d-flex flex-column align-items-center">
-                            <img src={FlagImg} width={36} height={36}/>
-                            <p className={classes.FooterMobileText} style={{width: '150%'}}>My Requests</p>
+                        <Col>
+                            <Link to={'/BuyerMyRequests'} className="d-flex flex-column align-items-center">
+                                <img src={FlagImg} width={36} height={36}/>
+                                <p className={classes.FooterMobileText} style={{width: '150%'}}>My Requests</p>
+                            </Link>
                         </Col>
                         <Col>
                            <Link to='/newRequest' className="d-flex flex-column align-items-center">

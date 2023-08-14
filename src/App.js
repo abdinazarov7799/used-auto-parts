@@ -34,7 +34,8 @@ function App() {
                         setUserData(data);
                         setSuccess(true);
                         setUserRole(data.user.Role);
-                        localStorage.setItem('UserRole', `${data.user.Role}`)
+                        localStorage.setItem('UserRole', `${data.user.Role}`);
+                        localStorage.setItem('UserID', `${data.user.UserID}`);
                     }
                 })
                 .catch(err => {

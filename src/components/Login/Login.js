@@ -30,6 +30,7 @@ function Login() {
                     customMessage(`${data.status}`, `This number is not registered`);
                 } else {
                     localStorage.setItem('authUserMobileNumber', `${mobileNumber.MobileNumber}`);
+                    localStorage.setItem('UserID', `${data.user.UserID}`);
                     setSuccess(true);
                 }
             })

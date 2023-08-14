@@ -1,17 +1,18 @@
 import {Col, Container, Row} from "reactstrap";
 import FooterBuyer from "../../Layouts/Footer/FooterBuyer";
 import {Button, Form, Input, message, Upload} from "antd";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import resizeFile from "../ImageResizer/ImageResizer";
 import {LoadingOutlined, PlusOutlined, UploadOutlined} from "@ant-design/icons";
 import {customMessage} from "../Message/Message";
+import {useNavigate} from "react-router";
 
 const initialRequest = {
     BuyerID: '',
     VIN: '',
     PartDescription: '',
-    CarDescription: '',
-    BrandName: '',
+    CarDescription: 'Epica 2011 G 55 AMG, 5.4L V8 Inv* Engines With Mechanical Supercharger, 5-Speed Automatic',
+    BrandName: 'Chevrolet',
     ImagePath: ''
 }
 
@@ -19,8 +20,17 @@ function NewRequest() {
     const [requestData, setRequestData] = useState(initialRequest);
     const [nextStep, setNextStep] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [imageUrl, setImageUrl] = useState();
+    const userID = localStorage.getItem('UserID');
+    const [success,setSuccess] = useState(false);
+    const navigate = useNavigate();
 
+    useEffect(() =>{
+        setRequestData((prevState) => ({
+                ...prevState,
+                ['BuyerID']: userID
+            }
+        ));
+    },[])
     function onChange(e) {
         const {name, value} = e.target;
         setRequestData((prevState) => ({
@@ -31,16 +41,20 @@ function NewRequest() {
     }
     const beforeUpload = async (file) => {
         const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-        const isLt2M = file.size / 1024 / 1024 < 10;
         if (!isJpgOrPng) {
             customMessage('error','You can only upload JPG/PNG file!');
-        }else if (!isLt2M) {
-            customMessage('error','Image must smaller than 10MB!');
-        }else {
-            const uri = await resizeFile(file);
-            const resizedImage = await fetch(uri).then(res => res.blob());
-            return new Blob([resizedImage], { type: 'image/jpeg' });
+            return;
         }
+
+        const isLt2M = file.size / 1024 / 1024 < 10;
+        if (!isLt2M) {
+            customMessage('error','Image must smaller than 10MB!');
+            return;
+        }
+
+        const uri = await resizeFile(file);
+        const resizedImage = await fetch(uri).then(res => res.blob());
+        return new Blob([resizedImage], { type: 'image/jpeg' });
     };
 
     const handleChange = (info) => {
@@ -68,7 +82,6 @@ function NewRequest() {
                             ...prevState,
                             ImagePath: data.imagePath,
                         }));
-                        setImageUrl(data.imagePath);
                     }
                 })
                 .catch((error) => {
@@ -78,7 +91,28 @@ function NewRequest() {
     };
 
     function onFinish() {
-        setNextStep(true)
+        if (nextStep){
+            fetch(process.env.REACT_APP_REQUEST_API, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body:  JSON.stringify(requestData) })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'error'){
+                        customMessage(`${data.status}`, `${data.message}`);
+                    } else {
+                        customMessage(`${data.status}`, `${data.message}`);
+                        setSuccess(data.success);
+                        navigate('/')
+                    }
+                })
+                .catch(err => {
+                    console.log(err)
+                });
+        }
+        setNextStep(true);
     }
 
     return (
