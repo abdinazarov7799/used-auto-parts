@@ -80,7 +80,7 @@ function RequestsCard(props) {
               <p className='mb-1'><span className='fw-bold'>Car Description:</span> {props.CarDescription}</p>
               <p className='mb-1 d-flex align-items-center'><span className='fw-bold me-1'>VIN: </span>
                   {props.VIN}
-                  <Tooltip title="Copy" className='p-0'>
+                  <Tooltip title="Copied" className='p-0'>
                       <Button
                           type="link"
                           icon={<CopyOutlined />}

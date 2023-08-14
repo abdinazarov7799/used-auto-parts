@@ -20,7 +20,6 @@ function BuyerMyRequests() {
 
 
     },[])
-    console.log(requests)
     return(
       <>
           <Container>
@@ -34,7 +33,7 @@ function BuyerMyRequests() {
               <Row className='pb-5'>
                   {
                       loading ? <Loading /> :
-                          requests.map((item) => {
+                          requests !== [] ? requests.map((item) => {
                               return (
                                   <Col xs={12} className={classes.slideIn}>
                                       <RequestsCard
@@ -48,7 +47,7 @@ function BuyerMyRequests() {
                                       />
                                   </Col>
                               )
-                          })
+                          }) : <h4>You have no request</h4>
                   }
               </Row>
           </Container>
