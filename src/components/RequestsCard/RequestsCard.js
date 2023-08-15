@@ -5,6 +5,8 @@ import {Button, Form, Input, Modal, Select, Tooltip} from "antd";
 import {CopyOutlined} from "@ant-design/icons";
 import {Option} from "antd/es/mentions";
 import {customMessage} from "../Message/Message";
+import {openGoogleMapsApp} from "../openGoogleMapsApp/OpenGoogleMapsApp";
+import {initiateCall} from "../initiateCall/initiateCall";
 
 const initialOfferData = {
     "RequestID": '',
@@ -135,7 +137,7 @@ function RequestsCard(props) {
                 <p className='fw-medium mb-0' style={{color: '#BDBDBD'}}>{timeSince(props.RequestDate)}</p>
             </Col>
         </div>
-          <Modal title={`${props.isBuyerOffer ? `New Offer from ${props.SellerName}` : props.Role !== 'Seller' ? 'My Request' : `New Request from ${props.BuyerName}`}`}
+          <Modal title={`${props.isBuyerOffer ? `New Offer from ${props.SellerName}` : props.Role !== 'seller' ? 'My Request' : `New Request from ${props.BuyerName}`}`}
                  open={isModalOpen}
                  onOk={handleOk}
                  onCancel={handleCancel}
@@ -143,7 +145,7 @@ function RequestsCard(props) {
                      <Button key="close" onClick={handleCancel}>
                          Close
                      </Button>,
-                     !makeOffer && props.Role === 'Seller' ?
+                     !makeOffer && props.Role === 'seller' ?
                          <Button key="makeAnOffer" type={"primary"} onClick={makeAnOffer}>
                             Make an offer
                          </Button> :
@@ -204,6 +206,7 @@ function RequestsCard(props) {
                                   <Button className='w-100'
                                           type={"primary"}
                                           style={{background: '#000', color: '#fff'}}
+                                          onClick={() => openGoogleMapsApp(props.Latitude,props.Longitude)}
                                   >
                                       Map
                                   </Button>
@@ -212,6 +215,7 @@ function RequestsCard(props) {
                                   <Button className='w-100'
                                           type={"primary"}
                                           style={{background: '#00BF36', color: '#fff'}}
+                                          onClick={() => initiateCall(props.ContactNumber)}
                                   >Call</Button>
                               </Col>
                           </Row>

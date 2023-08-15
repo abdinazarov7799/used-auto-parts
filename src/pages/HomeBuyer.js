@@ -15,8 +15,8 @@ function HomeBuyer() {
             .then(response => response.json())
             .then(data => {
                 setBuyerOffers(data.data);
-                console.log(data)
                 setLoading(false)
+                console.log(data)
             })
             .catch(err => console.log(err))
     },[])
@@ -52,6 +52,9 @@ function HomeBuyer() {
                                                         SellerName={item.SellerName}
                                                         PartAvailability={item.PartAvailability}
                                                         Price={item.Price}
+                                                        ContactNumber={item.ContactNumber}
+                                                        Latitude={item.Latitude}
+                                                        Longitude={item.Longitude}
                                                     />
                                                 </Col>
                                             )
