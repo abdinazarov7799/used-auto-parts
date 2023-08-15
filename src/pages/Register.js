@@ -7,6 +7,7 @@ import {Link} from "react-router-dom";
 const RegisterPage = () => {
   return(
       <>
+
           <Registration />
           <div style={{position: "fixed",width: '100%', bottom: '15px'}}>
             <Container>
