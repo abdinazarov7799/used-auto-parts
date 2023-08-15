@@ -23,7 +23,6 @@ function Registration() {
     const [next, setNext] = useState(false);
     const [secondNext, setSecondNext] = useState(false);
     const [registrationUserData, setRegistrationUserData] = useState(initialForm);
-    const [success, setSuccess] = useState();
     const [form] = Form.useForm();
     const navigate = useNavigate()
     function onRoleChange(e) {
@@ -38,7 +37,8 @@ function Registration() {
         }
     }
     function onChange(e) {
-        const {name, value} = e.target;
+        const {name} = e.target;
+        let value = e.target.value.replace(/\s+/g, '');
         setRegistrationUserData((prevState) => ({
                 ...prevState,
                 [name]: value
@@ -60,7 +60,6 @@ function Registration() {
                         customMessage(`${data.status}`, `Already registered with this number`);
                     } else {
                         customMessage(`${data.status}`, `${data.message}`);
-                        setSuccess(data.success);
                         localStorage.setItem('authUserMobileNumber', `${registrationUserData.MobileNumber}`);
                         navigate('/')
                     }
