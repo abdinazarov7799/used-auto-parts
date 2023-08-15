@@ -57,6 +57,10 @@ function Login() {
                               required: true,
                               message: 'Please input your phone!',
                           },
+                          {
+                              pattern: /^\+\d{3} \d{2} \d{3} \d{4}$/,
+                              message: 'Please enter a valid phone number!',
+                          },
                       ]}
                   >
                       <InputMask

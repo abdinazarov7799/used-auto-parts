@@ -38,7 +38,10 @@ function Registration() {
     }
     function onChange(e) {
         const {name} = e.target;
-        let value = e.target.value.replace(/\s+/g, '');
+        let value = e.target.value;
+        if (name === 'MobileNumber'){
+            value = e.target.value.replace(/\s+/g, '');
+        }
         setRegistrationUserData((prevState) => ({
                 ...prevState,
                 [name]: value
@@ -129,6 +132,10 @@ function Registration() {
                                         {
                                             required: true,
                                             message: 'Please input your phone!',
+                                        },
+                                        {
+                                            pattern: /^\+\d{3} \d{2} \d{3} \d{4}$/,
+                                            message: 'Please enter a valid phone number!',
                                         },
                                     ]}
                                 >
