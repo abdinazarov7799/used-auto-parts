@@ -45,7 +45,7 @@ function HomeBuyer() {
                                                         BrandName={item.BrandName}
                                                         VIN={item.VIN}
                                                         CarDescription={item.CarDescription}
-                                                        RequestDate={item.RequestDate}
+                                                        RequestDate={item.OfferDate}
                                                         RequestID={item.RequestID}
                                                         BuyerName={item.BuyerName}
                                                         isBuyerOffer={true}
