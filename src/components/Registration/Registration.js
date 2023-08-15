@@ -6,6 +6,8 @@ import EnterLoaction from "../EnterLocation/EnterLoaction";
 import SelectCarBrands from "../SelectCarBrands/SelectCarBrands";
 import {customMessage} from "../Message/Message";
 import {useNavigate} from "react-router";
+import InputMask from 'react-input-mask';
+
 
 const initialForm = {
     FullName: '',
@@ -78,13 +80,11 @@ function Registration() {
                 }
                 <Form
                     name="registration"
-                    labelCol={{span: 8}}
-                    wrapperCol={{span: 16}}
-                    style={{maxWidth: 600}}
                     initialValues={{remember: true}}
                     onFinish={onFinish}
                     autoComplete="off"
                     form={form}
+                    layout={"vertical"}
                 >
                     {
                         !next ?
@@ -123,22 +123,26 @@ function Registration() {
                                 </Select>
                             </Form.Item>
 
-                        <Form.Item
-                        label="Enter your phone number:"
-                        name="MobileNumber"
-                        rules={[
-                    {
-                        required: true,
-                        message: 'Please input your phone!',
-                    },
-                            {
-                                pattern: /^[0-5]{5,15}$/,
-                                message: 'Phone number must be between 5 to 15 digits!',
-                            }
-                        ]}
-                        >
-                        <Input name="MobileNumber" type={'number'} onChange={onChange}/>
-                        </Form.Item>
+                                <Form.Item
+                                    label="Enter your phone number:"
+                                    name="MobileNumber"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Please input your phone!',
+                                        },
+                                    ]}
+                                >
+                                    <InputMask
+                                        mask="+\9\7\1 99 999 9999"
+                                        placeholder="+971 __ ___ ____"
+                                        value={registrationUserData.MobileNumber}
+                                        onChange={onChange}
+                                    >
+                                        {(inputProps) => <Input {...inputProps} name="MobileNumber" />}
+                                    </InputMask>
+                                </Form.Item>
+
                             </>
                         :
                             !secondNext ?

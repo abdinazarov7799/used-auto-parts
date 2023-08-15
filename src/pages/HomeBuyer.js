@@ -16,7 +16,6 @@ function HomeBuyer() {
             .then(data => {
                 setBuyerOffers(data.data);
                 setLoading(false)
-                console.log(data)
             })
             .catch(err => console.log(err))
     },[])

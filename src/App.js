@@ -28,7 +28,6 @@ function App() {
                     .then(response => response.json())
                     .then(data => {
                         if (data.status === 'error'){
-                            console.log(data);
                             navigate('/register');
                         } else {
                             setUserData(data);

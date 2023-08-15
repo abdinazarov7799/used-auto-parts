@@ -3,6 +3,7 @@ import React, {useEffect, useState} from "react";
 import {Col, Container, Row} from "reactstrap";
 import {useNavigate} from "react-router";
 import {customMessage} from "../Message/Message";
+import InputMask from "react-input-mask";
 
 function Login() {
     const navigate = useNavigate()
@@ -58,8 +59,16 @@ function Login() {
                           },
                       ]}
                   >
-                      <Input name="MobileNumber" type={'number'} onChange={onChange}/>
+                      <InputMask
+                          mask="+\9\7\1 99 999 9999"
+                          placeholder="+971 __ ___ ____"
+                          value={mobileNumber}
+                          onChange={onChange}
+                      >
+                          {(inputProps) => <Input {...inputProps} name="MobileNumber" />}
+                      </InputMask>
                   </Form.Item>
+
                   <Form.Item>
                       <Button type="primary"
                               htmlType="submit"
