@@ -33,7 +33,7 @@ function BuyerMyRequests() {
               <Row className='pb-5'>
                   {
                       loading ? <Loading /> :
-                          requests.map((item) => {
+                          requests.slice().reverse().map((item) => {
                               return (
                                   <Col xs={12} className={classes.slideIn}>
                                       <RequestsCard

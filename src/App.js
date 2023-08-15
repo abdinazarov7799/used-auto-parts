@@ -17,7 +17,7 @@ function App() {
     }
 
     useEffect(() => {
-        if (userRole === undefined){
+        if (userRole === undefined || userRole === null){
             if (mobileNumber){
                 fetch(process.env.REACT_APP_LOGIN_API, {
                     method: 'POST',
@@ -30,7 +30,6 @@ function App() {
                         if (data.status === 'error'){
                             console.log(data);
                             navigate('/register');
-                            // customMessage(`${data.status}`, `This number is not registered`);
                         } else {
                             setUserData(data);
                             setSuccess(true);
