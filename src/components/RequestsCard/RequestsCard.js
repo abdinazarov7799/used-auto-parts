@@ -204,7 +204,9 @@ function RequestsCard(props) {
                                   <Button className='w-100'
                                           type={"primary"}
                                           style={{background: '#000', color: '#fff'}}
-                                  >Map</Button>
+                                  >
+                                      Map
+                                  </Button>
                               </Col>
                               <Col xs={6}>
                                   <Button className='w-100'
