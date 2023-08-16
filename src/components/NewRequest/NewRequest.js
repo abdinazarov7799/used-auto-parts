@@ -32,7 +32,11 @@ function NewRequest() {
         ));
     },[])
     function onChange(e) {
-        const {name, value} = e.target;
+        const {name} = e.target;
+        let value = e.target.value
+        if (name === 'VIN') {
+            value = value.toUpperCase();
+        }
         setRequestData((prevState) => ({
                 ...prevState,
                 [name]: value
@@ -112,9 +116,15 @@ function NewRequest() {
                     console.log(err)
                 });
         }
+        getCarDataFromVIN(requestData.VIN);
         setNextStep(true);
     }
-
+    function getCarDataFromVIN(vin) {
+        fetch(process.env.REACT_APP_VIN_DECODER_API + vin)
+            // .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(err => customMessage('error', err))
+    }
     return (
         <>
             <Container>
@@ -132,9 +142,17 @@ function NewRequest() {
                                     required: true,
                                     message: 'Please input your car VIN code!',
                                 },
+                                {
+                                    pattern: /^.{17}$/,
+                                    message: 'VIN code must be 17 characters!',
+                                },
                             ]}
                         >
-                            <Input name="VIN" onChange={onChange} style={{height: '40px'}}/>
+                            <Input name="VIN"
+                                   onChange={onChange}
+                                   style={{height: '40px', textTransform: 'uppercase'}}
+                                   maxLength={17}
+                            />
                         </Form.Item> :
                         <>
                             <Row className='justify-content-center mt-5 pt-5'>

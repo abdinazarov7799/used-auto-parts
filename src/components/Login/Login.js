@@ -11,7 +11,11 @@ function Login() {
     const [success, setSuccess] = useState()
 
     function onChange(e) {
-        const {name,value} = e.target;
+        const {name} = e.target;
+        let value = e.target.value;
+        if (name === 'MobileNumber'){
+            value = e.target.value.replace(/\s+/g, '');
+        }
         setMobileNumber((prevState) => ({
                 ...prevState,
                 [name]: value

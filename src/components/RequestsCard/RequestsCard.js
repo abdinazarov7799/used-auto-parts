@@ -182,7 +182,7 @@ function RequestsCard(props) {
                           <span style={{color: availabilityColor}}> {props.PartAvailability}</span>
                       </p>: null
               }
-              <p className='d-flex align-items-center my-0 mb-1'><span className='fw-bold'>VIN: </span>
+              <p className='d-flex align-items-center my-0 mb-1'><span className='fw-bold'>VIN:&nbsp;</span>
                   {props.VIN}
                   <Tooltip title="Copied" className='p-0'>
                       <Button
