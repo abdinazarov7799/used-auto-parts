@@ -122,7 +122,7 @@ function NewRequest() {
     function getCarDataFromVIN(vin) {
         fetch(process.env.REACT_APP_VIN_DECODER_API + vin + '/' ,{
             method: 'GET',
-            mode: "no-cors"
+            mode: "same-origin"
         })
             // .then(res => res.json())
             .then(data => console.log(data))
