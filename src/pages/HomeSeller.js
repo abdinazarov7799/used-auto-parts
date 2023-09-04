@@ -4,6 +4,7 @@ import React,{useEffect, useState} from "react";
 import Loading from "../components/Loading/Loading";
 import classes from "../components/BuyerMyRequests/BuyerMyRequests.module.css";
 import RequestsCard from "../components/RequestsCard/RequestsCard";
+import logo from "../assets/logo/logo.svg";
 
 function HomeSeller() {
     const [sellerRequests , setSellerRequests] = useState([]);
@@ -32,7 +33,14 @@ function HomeSeller() {
                             </Row>
                              :
                                 <>
-                                    <h1 className='mt-3'>Requests</h1>
+                                    <Row className='d-flex align-items-center mt-3'>
+                                        <Col xs={6}>
+                                            <h1>Requests</h1>
+                                        </Col>
+                                        <Col xs={6}>
+                                            <img src={logo} alt="logo"/>
+                                        </Col>
+                                    </Row>
                                     <Row>
                                         {
                                             loading ? <Loading /> :
